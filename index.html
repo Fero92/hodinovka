@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Norma</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+   <div class="container"> 
+        <div>
+            <label for="target">Cieľový počet kusov za hodinu:</label>
+            <input type="number" id="target" value="120">
+        </div>
+        <div>
+            <label for="achieved">Vyrobené kusy:</label>
+            <input type="number" id="achieved" value="95">
+        </div>
+        <div>
+            <button onclick="calculate()">Vypočítať</button>
+        </div>
+        <div>
+            <p id="percentage"></p>
+            <p id="time-left"></p>
+        </div>
+</div>
+    
+    
+    
+    <script>
+        function calculate() {
+            const targetPiecesPerHour = parseFloat(document.getElementById('target').value);
+            const achievedPieces = parseFloat(document.getElementById('achieved').value);
+
+            if (isNaN(targetPiecesPerHour) || isNaN(achievedPieces) || targetPiecesPerHour <= 0) {
+                alert('Zadajte platné hodnoty pre cieľový počet kusov za hodinu a vyrobené kusy.');
+                return;
+            }
+
+            const percentage = (achievedPieces / targetPiecesPerHour) * 100;
+            const timeLeftInMinutes = ((targetPiecesPerHour - achievedPieces) / targetPiecesPerHour) * 60;
+
+            document.getElementById('percentage').textContent = `Percentuálna norma: ${percentage.toFixed(2)} %`;
+            document.getElementById('time-left').textContent = `Chýbajúci čas do 100% normy: ${timeLeftInMinutes.toFixed(2)} min`;
+        }
+    </script>
+</body>
+</html>
